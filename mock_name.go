@@ -1,10 +1,10 @@
 package xtest
 
 func FirstName() string {
-	return PickString(seed.FirstName)
+	return PickOne(seed.FirstName)
 }
 func LastName() string {
-	return PickString(seed.LastName)
+	return PickOne(seed.LastName)
 }
 func Name() string {
 	return FirstName() + " " + LastName()
@@ -14,12 +14,11 @@ func FullName() string {
 }
 
 func CFirstName() string {
-	return PickString(seed.ChineseFirstName)
+	return PickOne(seed.ChineseFirstName)
 }
 func CLastName() string {
-	return PickString(seed.ChineseLastName)
+	return PickOne(seed.ChineseLastName)
 }
 func CName() string {
 	return CFirstName() + CLastName()
 }
-
