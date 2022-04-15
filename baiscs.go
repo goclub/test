@@ -10,7 +10,7 @@ func randomBig(max int) (random *big.Int, err error) {
 	return rand.Int(rand.Reader, big.NewInt(int64(max)))
 }
 
-// 返回 min ~ max 之间的数字，包括 min 和 max
+// Int 返回 min ~ max 之间的数字，包括 min 和 max
 func Int(min int, max int) (v int) {
 	if min > max {
 		min, max = max, min
@@ -21,7 +21,7 @@ func Int(min int, max int) (v int) {
 	}
 	rangeValue := max - min + 1
 	random, err := randomBig(rangeValue)
-	mockCheck(err)
+	checkError(err)
 	return int(random.Int64()) + min
 	// min 6 max 6
 	// return 6
@@ -49,10 +49,10 @@ func Bool() bool {
 // It panics if likelihood < 0 or likelihood > 100 .
 func TrueLikelihood(likelihood int) bool {
 	if likelihood < 0 {
-		panic(mockNewError("BoolLikelihood(likelihood int) likelihood can not less than 0%"))
+		panic(newError("BoolLikelihood(likelihood int) likelihood can not less than 0%"))
 	}
 	if likelihood > 100 {
-		panic(mockNewError("BoolLikelihood(likelihood int) likelihood can not greater than 100%"))
+		panic(newError("BoolLikelihood(likelihood int) likelihood can not greater than 100%"))
 	}
 	if likelihood == 0 {
 		return false
@@ -66,18 +66,23 @@ func RunesBySeed(seed []rune, size int) []rune {
 	result := []rune("")
 	for i := 0; i < size; i++ {
 		randIndex, err := randomBig(len(seed))
-		mockCheck(err)
+		checkError(err)
 		result = append(result, seed[randIndex.Int64()])
 	}
 	return result
 }
 
-func String(size int) string {
-	return string(RunesBySeed([]rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()[]"), size))
+// AZaz09 seed: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+func AZaz09(size int) string {
+	return string(RunesBySeed([]rune("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"), size))
 }
+
+// Letter seed: abcdefghijklmnopqrstuvwxyz
 func Letter(size int) string {
 	return string(RunesBySeed([]rune("abcdefghijklmnopqrstuvwxyz"), size))
 }
+
+// CapitalLetter seed: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 func CapitalLetter(size int) string {
 	return string(RunesBySeed([]rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), size))
 }
