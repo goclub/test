@@ -1,24 +1,26 @@
 package xtest
 
-func FirstName() string {
-	return PickOne(seed.FirstName)
+import "testing"
+
+func FirstName(t *testing.T) string {
+	return PickOne(t, seed.FirstName)
 }
-func LastName() string {
-	return PickOne(seed.LastName)
+func LastName(t *testing.T) string {
+	return PickOne(t, seed.LastName)
 }
-func Name() string {
-	return FirstName() + " " + LastName()
+func Name(t *testing.T) string {
+	return FirstName(t) + " " + LastName(t)
 }
-func FullName() string {
-	return FirstName() + " " + FirstName() + " " + LastName()
+func FullName(t *testing.T) string {
+	return FirstName(t) + " " + FirstName(t) + " " + LastName(t)
 }
 
-func CFirstName() string {
-	return PickOne(seed.ChineseFirstName)
+func CFirstName(t *testing.T) string {
+	return PickOne(t, seed.ChineseFirstName)
 }
-func CLastName() string {
-	return PickOne(seed.ChineseLastName)
+func CLastName(t *testing.T) string {
+	return PickOne(t, seed.ChineseLastName)
 }
-func CName() string {
-	return CFirstName() + CLastName()
+func CName(t *testing.T) string {
+	return CFirstName(t) + CLastName(t)
 }

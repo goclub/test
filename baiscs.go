@@ -2,19 +2,23 @@ package xtest
 
 import (
 	"crypto/rand"
-	"log"
 	"math/big"
+	"testing"
 )
 
-func randomBig(max int) (random *big.Int, err error) {
+func randomBig(max int64) (random *big.Int, err error) {
 	return rand.Int(rand.Reader, big.NewInt(int64(max)))
 }
 
 // Int 返回 min ~ max 之间的数字，包括 min 和 max
-func Int(min int, max int) (v int) {
+func Int(t *testing.T, min int, max int) (v int) {
+	return int(Int64(t, int64(min), int64(max)))
+}
+
+// Int64 返回 min ~ max 之间的数字，包括 min 和 max
+func Int64(t *testing.T, min int64, max int64) (v int64) {
 	if min > max {
 		min, max = max, min
-		log.Print("Int(min int, max int) min can not greater than max")
 	}
 	if min == max {
 		return max
@@ -22,7 +26,7 @@ func Int(min int, max int) (v int) {
 	rangeValue := max - min + 1
 	random, err := randomBig(rangeValue)
 	checkError(err)
-	return int(random.Int64()) + min
+	return random.Int64() + min
 	// min 6 max 6
 	// return 6
 
@@ -37,17 +41,16 @@ func Int(min int, max int) (v int) {
 	// min -2 max 4
 	// random: 0 ~ 6(4-(-2))
 	// return 1 + -2 = -1
-
 }
 
 // Bool equal TrueLikelihood(50)
-func Bool() bool {
-	return TrueLikelihood(50)
+func Bool(t *testing.T) bool {
+	return TrueLikelihood(t, 50)
 }
 
 // TrueLikelihood 根据百分比 返回 true 或 false
 // It panics if likelihood < 0 or likelihood > 100 .
-func TrueLikelihood(likelihood int) bool {
+func TrueLikelihood(t *testing.T, likelihood int64) bool {
 	if likelihood < 0 {
 		panic(newError("BoolLikelihood(likelihood int) likelihood can not less than 0%"))
 	}
@@ -57,15 +60,16 @@ func TrueLikelihood(likelihood int) bool {
 	if likelihood == 0 {
 		return false
 	}
-	random := Int(1, 100)
-	return bool(random <= likelihood)
+	random := Int64(t, 1, 100)
+	return random <= likelihood
 }
 
 // RunesBySeed 基于 seed 返回指定数量的 []rune
-func RunesBySeed(seed []rune, size int) []rune {
+func RunesBySeed(t *testing.T, seed []rune, size uint64) []rune {
 	result := []rune("")
-	for i := 0; i < size; i++ {
-		randIndex, err := randomBig(len(seed))
+	var i uint64 = 0
+	for ; i < size; i++ {
+		randIndex, err := randomBig(int64(len(seed)))
 		checkError(err)
 		result = append(result, seed[randIndex.Int64()])
 	}
@@ -73,16 +77,16 @@ func RunesBySeed(seed []rune, size int) []rune {
 }
 
 // AZaz09 seed: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
-func AZaz09(size int) string {
-	return string(RunesBySeed([]rune("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"), size))
+func AZaz09(t *testing.T, size uint64) string {
+	return string(RunesBySeed(t, []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"), size))
 }
 
 // Letter seed: abcdefghijklmnopqrstuvwxyz
-func Letter(size int) string {
-	return string(RunesBySeed([]rune("abcdefghijklmnopqrstuvwxyz"), size))
+func Letter(t *testing.T, size uint64) string {
+	return string(RunesBySeed(t, []rune("abcdefghijklmnopqrstuvwxyz"), size))
 }
 
 // CapitalLetter seed: ABCDEFGHIJKLMNOPQRSTUVWXYZ
-func CapitalLetter(size int) string {
-	return string(RunesBySeed([]rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), size))
+func CapitalLetter(t *testing.T, size uint64) string {
+	return string(RunesBySeed(t, []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), size))
 }

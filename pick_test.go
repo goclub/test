@@ -14,7 +14,7 @@ func TestPickOne(t *testing.T) {
 			var err error
 			count := map[string]int{}
 			err = xtest.Run(100, func(_ int) (op xtest.RunOp) {
-				item := xtest.PickOne([]string{"a", "b"})
+				item := xtest.PickOne(t, []string{"a", "b"})
 				count[item]++
 				return
 			})
@@ -28,7 +28,7 @@ func TestPickOne(t *testing.T) {
 			var err error
 			count := map[int]int{}
 			err = xtest.Run(100, func(_ int) (op xtest.RunOp) {
-				item := xtest.PickOne([]int{1, 2})
+				item := xtest.PickOne(t, []int{1, 2})
 				count[item]++
 				return
 			})

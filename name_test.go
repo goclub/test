@@ -12,7 +12,7 @@ var seed = xtest.OnlyTestSeed()
 func TestCFirstName(t *testing.T) {
 	nameMap := map[string]int{}
 	testRun(100, func(i int) (_break bool) {
-		name := xtest.CFirstName()
+		name := xtest.CFirstName(t)
 		nameMap[name]++
 		return
 	})
@@ -21,7 +21,7 @@ func TestCFirstName(t *testing.T) {
 func TestFirstName(t *testing.T) {
 	nameMap := map[string]int{}
 	testRun(100, func(i int) (_break bool) {
-		name := xtest.FirstName()
+		name := xtest.FirstName(t)
 		nameMap[name]++
 		return
 	})
@@ -31,7 +31,7 @@ func TestFirstName(t *testing.T) {
 func TestCLastName(t *testing.T) {
 	nameMap := map[string]int{}
 	testRun(100, func(i int) (_break bool) {
-		name := xtest.CLastName()
+		name := xtest.CLastName(t)
 		nameMap[name]++
 		return
 	})
@@ -41,7 +41,7 @@ func TestCLastName(t *testing.T) {
 func TestLastName(t *testing.T) {
 	nameMap := map[string]int{}
 	testRun(100, func(i int) (_break bool) {
-		name := xtest.LastName()
+		name := xtest.LastName(t)
 		nameMap[name]++
 		return
 	})
@@ -52,7 +52,7 @@ func TestName(t *testing.T) {
 
 	nameMap := map[string]int{}
 	testRun(100, func(i int) (_break bool) {
-		name := xtest.Name()
+		name := xtest.Name(t)
 		nameMap[name]++
 		return
 	})
@@ -70,7 +70,7 @@ func TestCName(t *testing.T) {
 
 	nameMap := map[string]int{}
 	testRun(100, func(i int) (_break bool) {
-		name := xtest.CName()
+		name := xtest.CName(t)
 		nameMap[name]++
 		return
 	})
@@ -82,7 +82,7 @@ func TestFullName(t *testing.T) {
 
 	nameMap := map[string]int{}
 	testRun(100, func(i int) (_break bool) {
-		name := xtest.FullName()
+		name := xtest.FullName(t)
 		nameMap[name]++
 		return
 	})
@@ -100,10 +100,10 @@ func TestFullName(t *testing.T) {
 
 type mockNames struct {
 	FirstName  string `cha:"FirstName()"`
-	LastName   string `cha:"LastName()"`
+	LastName   string `cha:"LastName(t)"`
 	Name       string `cha:"Name()"`
 	FullName   string `cha:"FullName()"`
-	CFirstName string `cha:"CFirstName()"`
-	CLastName  string `cha:"CLastName()"`
-	CName      string `cha:"CName()"`
+	CFirstName string `cha:"CFirstName(t)"`
+	CLastName  string `cha:"CLastName(t)"`
+	CName      string `cha:"CName(t)"`
 }

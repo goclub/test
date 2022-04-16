@@ -11,7 +11,7 @@ import (
 func coreTestInt(t *testing.T, min int, max int, rangeList []int) {
 	list := []int{}
 	testRun(1000, func(i int) (_break bool) {
-		list = append(list, xtest.Int(min, max))
+		list = append(list, xtest.Int(t, min, max))
 		return
 	})
 	for _, item := range list {
@@ -59,7 +59,7 @@ func TestBool(t *testing.T) {
 		trueCount := 0
 		falseCount := 0
 		testRun(10000, func(i int) (_break bool) {
-			if xtest.Bool() {
+			if xtest.Bool(t) {
 				trueCount++
 			} else {
 				falseCount++
@@ -74,7 +74,7 @@ func TestTrueLikelihood(t *testing.T) {
 		trueCount := 0
 		falseCount := 0
 		testRun(10000, func(i int) (_break bool) {
-			if xtest.TrueLikelihood(0) {
+			if xtest.TrueLikelihood(t, 0) {
 				trueCount++
 			} else {
 				falseCount++
@@ -87,7 +87,7 @@ func TestTrueLikelihood(t *testing.T) {
 		trueCount := 0
 		falseCount := 0
 		testRun(10000, func(i int) (_break bool) {
-			if xtest.TrueLikelihood(10) {
+			if xtest.TrueLikelihood(t, 10) {
 				trueCount++
 			} else {
 				falseCount++
@@ -100,7 +100,7 @@ func TestTrueLikelihood(t *testing.T) {
 		trueCount := 0
 		falseCount := 0
 		testRun(10000, func(i int) (_break bool) {
-			if xtest.TrueLikelihood(20) {
+			if xtest.TrueLikelihood(t, 20) {
 				trueCount++
 			} else {
 				falseCount++
@@ -113,7 +113,7 @@ func TestTrueLikelihood(t *testing.T) {
 		trueCount := 0
 		falseCount := 0
 		testRun(10000, func(i int) (_break bool) {
-			if xtest.TrueLikelihood(100) {
+			if xtest.TrueLikelihood(t, 100) {
 				trueCount++
 			} else {
 				falseCount++
@@ -127,17 +127,17 @@ func TestTrueLikelihood(t *testing.T) {
 
 func TestLetter(t *testing.T) {
 
-	assert.Equal(t, len(xtest.Letter(10)), 10)
-	assert.False(t, testMustBool(regexp.MatchString(`[^a-z]`, xtest.Letter(10000))))
+	assert.Equal(t, len(xtest.Letter(t, 10)), 10)
+	assert.False(t, testMustBool(regexp.MatchString(`[^a-z]`, xtest.Letter(t, 10000))))
 }
 func TestCapitalLetter(t *testing.T) {
 
-	assert.Equal(t, len(xtest.CapitalLetter(10)), 10)
-	assert.False(t, testMustBool(regexp.MatchString(`[^A-Z]`, xtest.CapitalLetter(10000))))
+	assert.Equal(t, len(xtest.CapitalLetter(t, 10)), 10)
+	assert.False(t, testMustBool(regexp.MatchString(`[^A-Z]`, xtest.CapitalLetter(t, 10000))))
 }
 func TestAZaz09(t *testing.T) {
 	testRun(100, func(i int) (_break bool) {
-		s := xtest.AZaz09(xtest.Int(1, 5))
+		s := xtest.AZaz09(t, uint64(xtest.Int64(t, 1, 5)))
 		testRange(t, len(s), 1, 5)
 		for i := 0; i < len(s); i++ {
 			v := s[i]

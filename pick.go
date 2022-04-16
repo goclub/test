@@ -1,10 +1,12 @@
 package xtest
 
-func PickOne[T comparable](slice []T) T {
+import "testing"
+
+func PickOne[T comparable](t *testing.T, slice []T) T {
 	listLen := len(slice)
 	if listLen == 0 {
-		panic(newError("PickOne(list) list can not be empty slice"))
+		panic(newError("PickOne(t,list) list can not be empty slice"))
 	}
-	index := Int(0, listLen-1)
+	index := Int(t, 0, listLen-1)
 	return slice[index]
 }
