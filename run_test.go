@@ -9,7 +9,7 @@ import (
 func TestRun(t *testing.T) {
 	{
 		data := []int{}
-		err := xtest.Run(10, func(i int) (op xtest.RunOp) {
+		err := xtest.Run(t, 10, func(i int) (op xtest.RunOp) {
 			data = append(data, i)
 			if i == 5 {
 				return op.Break()
@@ -21,7 +21,7 @@ func TestRun(t *testing.T) {
 	}
 	{
 		data := []int{}
-		err := xtest.Run(10, func(i int) (op xtest.RunOp) {
+		err := xtest.Run(t, 10, func(i int) (op xtest.RunOp) {
 			data = append(data, i)
 			return
 		})

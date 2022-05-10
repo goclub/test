@@ -24,7 +24,7 @@ func testRange(t *testing.T, v int, min int, max int) {
 	assert.LessOrEqual(t, v, max)
 }
 
-func testIn[T comparable](list []T, target T) bool {
+func testInString(list []string, target string) bool {
 	for _, s := range list {
 		if s == target {
 			return true
@@ -33,9 +33,9 @@ func testIn[T comparable](list []T, target T) bool {
 	return false
 }
 
-func testPickOne[T comparable](t *testing.T, seed []T, counter map[T]int) {
+func testPickString(t *testing.T, seed []string, counter map[string]int) {
 	assert.True(t, len(counter) != 0)
 	for name, _ := range counter {
-		assert.True(t, testIn(seed, name))
+		assert.True(t, testInString(seed, name))
 	}
 }

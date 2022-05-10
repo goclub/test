@@ -6,15 +6,15 @@ import (
 	"testing"
 )
 
-func TestPickOne(t *testing.T) {
+func TestPickString(t *testing.T) {
 	func() struct{} {
 		// -------------
-		// PickOne []stirng
+		// PickString []stirng
 		{
 			var err error
 			count := map[string]int{}
-			err = xtest.Run(100, func(_ int) (op xtest.RunOp) {
-				item := xtest.PickOne(t, []string{"a", "b"})
+			err = xtest.Run(t, 100, func(_ int) (op xtest.RunOp) {
+				item := xtest.PickString(t, []string{"a", "b"})
 				count[item]++
 				return
 			})
@@ -23,12 +23,12 @@ func TestPickOne(t *testing.T) {
 			assert.Greater(t, count["b"], 0)
 			assert.Equal(t, count["a"]+count["b"], 100)
 		}
-		// PickOne []int
+		// PickString []int
 		{
 			var err error
 			count := map[int]int{}
-			err = xtest.Run(100, func(_ int) (op xtest.RunOp) {
-				item := xtest.PickOne(t, []int{1, 2})
+			err = xtest.Run(t, 100, func(_ int) (op xtest.RunOp) {
+				item := xtest.PickInt(t, []int{1, 2})
 				count[item]++
 				return
 			})

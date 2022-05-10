@@ -16,7 +16,7 @@ func TestCFirstName(t *testing.T) {
 		nameMap[name]++
 		return
 	})
-	testPickOne(t, seed.ChineseFirstName, nameMap)
+	testPickString(t, seed.ChineseFirstName, nameMap)
 }
 func TestFirstName(t *testing.T) {
 	nameMap := map[string]int{}
@@ -25,7 +25,7 @@ func TestFirstName(t *testing.T) {
 		nameMap[name]++
 		return
 	})
-	testPickOne(t, seed.FirstName, nameMap)
+	testPickString(t, seed.FirstName, nameMap)
 }
 
 func TestCLastName(t *testing.T) {
@@ -35,7 +35,7 @@ func TestCLastName(t *testing.T) {
 		nameMap[name]++
 		return
 	})
-	testPickOne(t, seed.ChineseLastName, nameMap)
+	testPickString(t, seed.ChineseLastName, nameMap)
 }
 
 func TestLastName(t *testing.T) {
@@ -45,7 +45,7 @@ func TestLastName(t *testing.T) {
 		nameMap[name]++
 		return
 	})
-	testPickOne(t, seed.LastName, nameMap)
+	testPickString(t, seed.LastName, nameMap)
 }
 
 func TestName(t *testing.T) {
@@ -61,8 +61,8 @@ func TestName(t *testing.T) {
 		names := strings.Split(name, " ")
 		firstName := names[0]
 		lastName := names[1]
-		assert.True(t, testIn(seed.FirstName, firstName))
-		assert.True(t, testIn(seed.LastName, lastName))
+		assert.True(t, testInString(seed.FirstName, firstName))
+		assert.True(t, testInString(seed.LastName, lastName))
 	}
 }
 
@@ -92,9 +92,9 @@ func TestFullName(t *testing.T) {
 		firstName := names[0]
 		middleName := names[1]
 		lastName := names[2]
-		assert.True(t, testIn(seed.FirstName, firstName))
-		assert.True(t, testIn(seed.MiddleName, middleName))
-		assert.True(t, testIn(seed.LastName, lastName))
+		assert.True(t, testInString(seed.FirstName, firstName))
+		assert.True(t, testInString(seed.MiddleName, middleName))
+		assert.True(t, testInString(seed.LastName, lastName))
 	}
 }
 

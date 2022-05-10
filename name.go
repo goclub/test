@@ -3,10 +3,10 @@ package xtest
 import "testing"
 
 func FirstName(t *testing.T) string {
-	return PickOne(t, seed.FirstName)
+	return PickString(t, seed.FirstName)
 }
 func LastName(t *testing.T) string {
-	return PickOne(t, seed.LastName)
+	return PickString(t, seed.LastName)
 }
 func Name(t *testing.T) string {
 	return FirstName(t) + " " + LastName(t)
@@ -16,10 +16,10 @@ func FullName(t *testing.T) string {
 }
 
 func CFirstName(t *testing.T) string {
-	return PickOne(t, seed.ChineseFirstName)
+	return PickString(t, seed.ChineseFirstName)
 }
 func CLastName(t *testing.T) string {
-	return PickOne(t, seed.ChineseLastName)
+	return PickString(t, seed.ChineseLastName)
 }
 func CName(t *testing.T) string {
 	return CFirstName(t) + CLastName(t)

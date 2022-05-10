@@ -1,5 +1,7 @@
 package xtest
 
+import "testing"
+
 type RunOp struct {
 	shouldBreak bool
 	err         error
@@ -14,7 +16,7 @@ func (RunOp) Break() RunOp {
 func (RunOp) BreakWithErr(err error) RunOp {
 	return RunOp{shouldBreak: true, err: err}
 }
-func Run(times int, fn func(i int) (op RunOp)) error {
+func Run(t *testing.T, times int, fn func(i int) (op RunOp)) error {
 	for i := 0; i < times; i++ {
 		op := fn(i)
 		if op.err != nil {
